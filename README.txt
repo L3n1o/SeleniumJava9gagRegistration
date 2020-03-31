@@ -3,7 +3,9 @@ This is simple test of registration feature on 9gag.com
 To run this test you can:
 
 1) open it in Eclipse and then run /Registration9gag/src/test/java/Registration9gag/Runner/MainRunner.java as JUnit test
-2)???
+2) if you have Maven installed: run cmd.exe and go to project directory, then run this command: 
+mvn clean test -Dtest=Registration9gag.Runner.MainRunner.java
+
 
 Test is checking couple of basic configuration of invalid data and one for valid full name, email, password and age. Before running test with valid data, please fill columns in second table in /Registration9gag/src/test/java/Registration9gag/FeatureFiles/Login.feature with valid full name, email, password and age.
 -full name can be 1 char, 
