@@ -1,4 +1,4 @@
-package Registration9gag.StepsFiles;
+package Registration9gag.DriverSetUp;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,41 +8,44 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class DriverSetUp {
-	protected static WebDriver driver;
 	
-	protected WebDriver driverSetUp(String browser)
+	public WebDriver driverSetUp(WebDriver driver, String browser)
 	{
 		if (driver == null) {
 			switch(browser)
 			{
 			case "chrome":
-				setUpChrome();
+				driver = setUpChrome(driver);
 				break;
 			case "firefox":
-				setUpFirefox();
+				driver = setUpFirefox(driver);
 				break;
 			}	
 		}
 		return driver;
 	}
 	
-	private void setUpChrome()
+	private WebDriver setUpChrome(WebDriver driver)
 	{
-		System.setProperty("webdriver.chrome.driver","src\\test\\java\\Registration9gag\\Resources\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver","src\\test\\java\\Login9gag\\Resources\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);	
+		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+		
+		return driver;
     }
 	
-	private void setUpFirefox()
+	private WebDriver setUpFirefox(WebDriver driver)
 	{
-		System.setProperty("webdriver.gecko.driver","src\\test\\java\\Registration9gag\\Resources\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver","src\\test\\java\\Login9gag\\Resources\\geckodriver.exe");
 		DesiredCapabilities firefoxOptions = DesiredCapabilities.firefox();
 		firefoxOptions.setCapability("marionette", true);
 		driver = new FirefoxDriver(firefoxOptions);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);		
+		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);	
+		
+		return driver;
 	}
 }
