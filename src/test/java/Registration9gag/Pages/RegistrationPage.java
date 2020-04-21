@@ -1,15 +1,5 @@
 package Registration9gag.Pages;
 
-import Registration9gag.DriverSetUp.DriverSetUp;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -18,76 +8,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegistrationPage {
-	JSONParser jsonParser = new JSONParser();
-	BufferedReader reader;
-	DriverSetUp driverSetUp = new DriverSetUp();
-	//String username, password;
+	private WebDriver driver;
 	
-	/* Read user data from file
-	public void readUserData()
-	{	
-		driver = driverSetUp("");
-        try
-        {
-        	Object obj = jsonParser.parse(new FileReader("src\\test\\java\\Registration9gag\\Resources\\registerData.json"));
-        	JSONObject jsonObject = (JSONObject) obj;
- 
- 			full_name = (String) jsonObject.get("full_name");
-			email = (String) jsonObject.get("email");
-			password = (String) jsonObject.get("password"); 
-			age = (String) jsonObject.get("age")
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }}
-    //Text file reader
-		try {
-			reader = new BufferedReader(new FileReader("src\\test\\java\\Registration9gag\\Resources\\loginData.txt"));
-			username = reader.readLine();
-			password = reader.readLine();
-			System.out.println(username + " " + password);
-		}
-		catch(IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}*/
-	public WebDriver readBrowser(WebDriver driver)
-	{	
-        try
-        {
-        	Object obj = jsonParser.parse(new FileReader("src\\test\\java\\Registration9gag\\Resources\\browser.json"));
-        	JSONObject jsonObject = (JSONObject) obj;
-        	driver = driverSetUp.driverSetUp(driver, (String) jsonObject.get("browser"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return driver;
+	public RegistrationPage(WebDriver driver)
+	{
+		this.driver = driver;
 	}
-       /*//Text file reader
-		try {
-			reader = new BufferedReader(new FileReader("\src\\test\\java\\Registration9gag\\Resources\\browser.txt"));
-			driver = driverSetUp(reader.readLine());
-		}
-		catch(IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}*/
 	
-	public void getPage(WebDriver driver)
+	public void getPage()
 	{
 		driver.get("https://9gag.com/signup");
 	}
 	
-	public void closePopUp(WebDriver driver)
+	public void closePopUp()
 	{
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -98,7 +31,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void clickEmailButton(WebDriver driver)
+	public void clickEmailButton()
 	{
 		try {
 			driver.findElement(By.xpath("//*[@id=\"signup-fb\"]/p[2]/a")).click();
@@ -108,7 +41,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void putFullName(WebDriver driver, String full_name)
+	public void putFullName(String full_name)
 	{
 		try {
 			driver.findElement(By.id("signup-email-name")).clear();
@@ -119,7 +52,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void putEmail(WebDriver driver, String email)
+	public void putEmail(String email)
 	{
 		try {
 			driver.findElement(By.id("signup-email-email")).clear();
@@ -130,7 +63,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void putPassword(WebDriver driver, String password)
+	public void putPassword(String password)
 	{
 		try {
 			driver.findElement(By.id("signup-email-password")).clear();
@@ -141,7 +74,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void clickSignUp(WebDriver driver)
+	public void clickSignUp()
 	{
 		try {
 			driver.findElement(By.xpath("//*[@id=\"signup-email\"]/form/div[4]/a")).click();
@@ -151,7 +84,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void putAge(WebDriver driver, String age)
+	public void putAge(String age)
 	{
 		try {
 			driver.findElement(By.id("signup-email-age")).clear();
@@ -162,7 +95,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public void checkImNotARobot(WebDriver driver)
+	public void checkImNotARobot()
 	{
 		try {
 			driver.findElement(By.xpath("//*[@id=\"recaptcha-anchor\"]/div[1]")).click();
@@ -177,7 +110,7 @@ public class RegistrationPage {
 		}
 	}
 	
-	public boolean successfulPage(WebDriver driver)
+	public boolean successfulPage()
 	{
 		try {
 			if(driver.findElement(By.id("jsid-banner-confirm-email")).isDisplayed())
@@ -189,7 +122,7 @@ public class RegistrationPage {
 		return false;		
 	}
 	
-	public boolean unsuccessfulPage(WebDriver driver)
+	public boolean unsuccessfulPage()
 	{
 		try {
 			if(driver.findElement(By.xpath("//*[@id=\"signup-email\"]/form/div[3]/p")).isDisplayed())
